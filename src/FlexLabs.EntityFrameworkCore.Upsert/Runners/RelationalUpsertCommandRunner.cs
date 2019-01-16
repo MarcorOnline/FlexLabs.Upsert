@@ -83,7 +83,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Runners
             var joinColumnNames = joinColumns.Select(c => c.Relational().ColumnName).ToArray();
 
             var properties = entityType.GetProperties()
-                .Where(p => p.ValueGenerated == ValueGenerated.Never)
+                .Where(p => p.ValueGenerated == ValueGenerated.Never || p.IsKey())
                 .ToArray();
 
             List<(IProperty Property, KnownExpression Value)> updateExpressions = null;
